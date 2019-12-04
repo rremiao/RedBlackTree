@@ -41,7 +41,7 @@ public class App {
 		System.out.println("Digite de qual pai deseja descobrir o pai do elemento: ");
 		int pai = s.nextInt();
 		System.out.println("Pai do elemento desejado: "+ a.getParentCep(pai));
-		System.out.println("Digite qual elemento deseja descobrir onde esta: ");
+		System.out.println("Digite qual elemento deseja verificar: ");
 		int elemento = s.nextInt();
 		System.out.println("O elemento desejado eh: "+a.getCep(elemento));
 
