@@ -25,113 +25,112 @@ public class Arvore {
 	public int count;
 
 	public Arvore() {
-		this.root = Arvore.nil;
+		root = Arvore.nil;
 	}
 
 	public Arvore(int key) {
-		this.root = new Node(key, false);
+		root = new Node(key, false);
 	}
 
-	private void rotacao_esq(Node x) {
-		Node y = x.right;
-		x.right = y.left;
-		if (y.left != Arvore.nil) {
-			y.left.father = x;
+	private void rotacao_esq(Node n) {
+		Node aux = n.right;
+		n.right = aux.left;
+		if (aux.left != Arvore.nil) {
+			aux.left.father = n;
 		}
-		y.father = x.father;
-		if (x.father == Arvore.nil){
-			this.root = y;
+		aux.father = n.father;
+		if (n.father == Arvore.nil){
+			root = aux;
 		}	
-		else if (x == x.father.left){
-			x.father.left = y;
+		else if (n == n.father.left){
+			n.father.left = aux;
 		}
 		else{
-			x.father.right = y;
+			n.father.right = aux;
 		}
-		y.left = x;
-		x.father = y;
+		aux.left = n;
+		n.father = aux;
 	}
 
-	private void rotacao_dir(Node x) {
-		Node y = x.left;
-		x.left = y.right;
-		if (y.right != Arvore.nil){
-			y.right.father = x;
+	private void rotacao_dir(Node n) {
+		Node aux = n.left;
+		n.left = aux.right;
+		if (aux.right != Arvore.nil){
+			aux.right.father = n;
 		}
-		y.father = x.father;
-		if (x.father == Arvore.nil){
-			this.root = y;
+		aux.father = n.father;
+		if (n.father == Arvore.nil){
+			root = aux;
 		}
-		else if (x == x.father.left){
-			x.father.left = y;
+		else if (n == n.father.left){
+			n.father.left = aux;
 		}
 		else{
-			x.father.right = y;
+			n.father.right = aux;
 		}
-		y.right = x;
-		x.father = y;
+		aux.right = n;
+		n.father = aux;
 	}
 
 	public void add(Integer n) { //Notação O(log n)
-
-		if (this.root == Arvore.nil) {
-			this.root = new Node(n, false);
+		if (root == Arvore.nil) {
+			root = new Node(n, false);
 		} else {
-			Node a = this.encontra(n);
-			if (n < a.key) {
-				a.left = new Node(n, true);
-				a.left.father = a;
-				this.fixaadicao(a.left);
-			} else if (n > a.key) {
-				a.right = new Node(n, true);
-				a.right.father = a;
-				this.fixaadicao(a.right);
+			Node aux = encontra(n);
+			if (n < aux.key) {
+				aux.left = new Node(n, true);
+				aux.left.father = aux;
+				fix(aux.left);
+			} else if (n > aux.key) {
+				aux.right = new Node(n, true);
+				aux.right.father = aux;
+				fix(aux.right);
 			}
 		}	
 		count++;
 	}
 
-	private void fixaadicao(Node z) {
-		Node y;
-		while (z.father.color) {
-			if (z.father == z.father.father.left) {
-				y = z.father.father.right;
-				if (y.color) {
-					z.father.color = false;
-					y.color = false;
-					z.father.father.color = true;
-					z = z.father.father;
+	private void fix(Node n) {
+		Node aux;
+		while (n.father.color) {
+			if (n.father == n.father.father.left) {
+				aux = n.father.father.right;
+				if (aux.color) {
+					n.father.color = false;
+					aux.color = false;
+					n.father.father.color = true;
+					n = n.father.father;
 				} else {
-					if (z == z.father.right) {
-						z = z.father;
-						this.rotacao_esq(z);
+					if (n == n.father.right) {
+						n = n.father;
+						rotacao_esq(n);
 					}
-					z.father.color = false;
-					z.father.father.color = true;
-					this.rotacao_dir(z.father.father);
+					n.father.color = false;
+					n.father.father.color = true;
+					rotacao_dir(n.father.father);
 				}
 			} else {
-				y = z.father.father.left;
-				if (y.color) {
-					y.color = z.father.color = false;
-					z.father.father.color = true;
-					z = z.father.father;
+				aux = n.father.father.left;
+				if (aux.color) {
+					aux.color = n.father.color = false;
+					n.father.father.color = true;
+					n = n.father.father;
 				} else {
-					if (z == z.father.left) {
-						z = z.father;
-						this.rotacao_dir(z);
+					if (n == n.father.left) {
+						n = n.father;
+						rotacao_dir(n);
 					}
-					z.father.color = false;
-					z.father.father.color = true;
-					this.rotacao_esq(z.father.father);
+					n.father.color = false;
+					n.father.father.color = true;
+					rotacao_esq(n.father.father);
 				}
 			}
 		}
-		this.root.color = false;
+		root.color = false;
 	}
 
 	public Node encontra(int n) {
-		return this.root.encontra(n);
+		return root.encontra(n);
 	}
 
 	public void print() {
