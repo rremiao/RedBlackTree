@@ -1,21 +1,21 @@
 public class Arvore {
 
 	private static class Node {
-		private Integer key; 
-		private Node father, left, right;
-		private boolean color; //false = preto	
+		public Integer key; 
+		public Node father, left, right;
+		public boolean color; //false = preto	
 							  //true = vermelho
 		
-		public Node(int n, boolean color) {
-			this.key = n;
+		public Node(int key, boolean color) {
+			this.key = key;
 			this.color = color;
 			this.father = this.left = this.right = Arvore.nil;
 		}
 
 		// Busca o nó que será o pai do proximo nó a ser inserido
-		private Node encontra(int n) {
-			if (n < this.key && this.left != Arvore.nil) return this.left.encontra(n);
-			else if (n > this.key && this.right != Arvore.nil) return this.right.encontra(n);
+		public Node encontraNodo(int n) {
+			if (n < this.key && this.left != Arvore.nil) return this.left.encontraNodo(n);
+			else if (n > this.key && this.right != Arvore.nil) return this.right.encontraNodo(n);
 			else return this;
 		}
 	}	
@@ -130,7 +130,7 @@ public class Arvore {
 	}
 
 	public Node encontra(int n) {
-		return root.encontra(n);
+		return root.encontraNodo(n);
 	}
 
 	public void print() {
@@ -152,13 +152,12 @@ public class Arvore {
 	}
 
 	public boolean isEmpty() { //Notação O(1)
-            if(root == null) return true;
-            else return false;
-        }
+       return (root == Arvore.nil);
+    }
 
-        public int size() { //Notação O(1)
-            return count;
-        }
+    public int size() { //Notação O(1)
+        return count;
+    }
 
         public boolean contains(int e) { //Notação O (n)
             Node aux = encontra(e);
