@@ -6,7 +6,8 @@ public class CEP {
     public int geraRandom(){
         int min = 10000000;
         int max = 99999999;
-        return (int) ((Math.random() * (max - min)) + min);       
+        return (int) ((Math.random() * (max - min)) + min);  
+         
     }
 
     public void printaCEP(){
