@@ -259,6 +259,7 @@ public class Arvore {
         public Arvore clone() {
 			Arvore a = new Arvore();
 			clone(root, a);
+			a.print();
 			return a;
 		}
 

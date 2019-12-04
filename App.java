@@ -45,6 +45,11 @@ public class App {
 		int elemento = s.nextInt();
 		System.out.println("O elemento desejado eh: "+a.getCep(elemento));
 
+
+		System.out.println("-----------------********-----------------");
+		System.out.println("Clonando...");
+		a.cloneCEP();
+
 		
 
 

@@ -1,7 +1,6 @@
 import java.util.Random;
 
 public class CEP {
-    public int seuCep;
     public Arvore a = new Arvore();
 
     public int geraRandom(){
@@ -64,8 +63,8 @@ public class CEP {
         return a.positionsWidth();
     }
 
-    public Arvore clone(){
-        return a.clone();
+    public void cloneCEP(){
+        a.clone();
     }
     
 }
